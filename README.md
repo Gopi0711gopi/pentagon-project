@@ -1,37 +1,82 @@
-# Pentagon - Agentic Workflow Orchestrator
+# Pentagon — Multi-Agent AI Workflow Orchestration Platform
 
-**"Five Agents. One Mission. Total Sovereignty."**
+> An autonomous five-agent AI system that automates complex business workflows end-to-end.
 
-## Quick Start
+## Overview
+
+Pentagon is a production-grade multi-agent AI platform built with LangGraph and OpenAI. It coordinates five specialized agents — Guardian, Financier, Scout, Operator, and Liaison — to handle business processes autonomously with real-time monitoring.
+
+## Features
+
+- 🧠 **5 Specialized Agents** — Guardian (security), Financier (finance), Scout (research), Operator (execution), Liaison (communication)
+- 🔗 **LangGraph Orchestration** — Stateful agent graphs with conditional routing and memory
+- 📡 **Real-Time War Room** — Next.js dashboard with SSE streaming and WebSocket live updates
+- 🗄️ **Vector Memory** — Pinecone integration for long-term agent context retrieval
+- 🔐 **JWT Authentication** — Secure user auth with bcrypt password hashing
+- 📂 **File Processing** — Multi-part upload with PyPDF2 document ingestion
+- 🔁 **Audit Logging** — Full action trail stored in PostgreSQL
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Python, FastAPI, LangGraph, OpenAI API |
+| Frontend | Next.js 14, React, Tailwind CSS, Spline 3D |
+| Database | PostgreSQL, Redis (session cache) |
+| Vector DB | Pinecone |
+| Auth | JWT, bcrypt, python-jose |
+| Transport | WebSockets, SSE (Server-Sent Events) |
+| Deploy | Docker, Docker Compose |
+
+## Architecture
+
+```
+pentagon-project/
+├── backend/
+│   ├── agents/          # 5 agent definitions
+│   ├── orchestrator.py  # LangGraph workflow
+│   ├── models.py        # Pydantic schemas
+│   ├── memory/          # Vector memory handlers
+│   ├── services/        # Business logic
+│   ├── tools/           # Agent tools
+│   └── main.py          # FastAPI entry point
+└── frontend/
+    ├── app/             # Next.js App Router pages
+    └── utils/           # Client utilities
+```
+
+## Getting Started
+
+### Backend
 
 ```bash
-# Backend
 cd backend
-python -m venv venv
-source venv/bin/activate
+python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python main.py
+cp .env.example .env   # Add OPENAI_API_KEY, DATABASE_URL, PINECONE_API_KEY
+uvicorn main:app --reload
+```
 
-# Frontend
+### Frontend
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-## Architecture
+Open [http://localhost:3000](http://localhost:3000)
 
-- **Backend:** FastAPI + LangGraph (Port 8000)
-- **Frontend:** Next.js 16 (Port 3000)
-- **Memory:** Pinecone + PostgreSQL + Redis
+## Environment Variables
 
-## The Five Agents
+```env
+OPENAI_API_KEY=your_key
+DATABASE_URL=postgresql://user:pass@localhost/pentagon
+REDIS_URL=redis://localhost:6379
+PINECONE_API_KEY=your_key
+JWT_SECRET=your_secret
+```
 
-1. **Guardian** - Security & threat detection
-2. **Financier** - Money & invoice management
-3. **Scout** - Lead generation & growth
-4. **Operator** - Task & calendar coordination
-5. **Liaison** - Human interface & daily briefs
+## License
 
-## Current Phase
-
-**Month 1, Week 1:** Infrastructure setup
+MIT
