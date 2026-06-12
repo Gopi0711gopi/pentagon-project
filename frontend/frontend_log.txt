@@ -1,0 +1,102 @@
+
+> pentagon-frontend@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 1346ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.3s (572 modules)
+ GET / 200 in 2751ms
+ ✓ Compiled in 390ms (270 modules)
+ ○ Compiling /login ...
+ ✓ Compiled /login in 887ms (564 modules)
+ ✓ Compiled in 606ms (578 modules)
+ GET / 200 in 166ms
+ ✓ Compiled in 314ms (272 modules)
+ ✓ Compiled in 221ms (272 modules)
+ ⨯ ./components/CommandBar.js
+Error: 
+  [31mx[0m the name `historyIdx` is defined multiple times
+    ,-[[36;1;4m/home/gopi/pentagon-project/frontend/components/CommandBar.js[0m:12:1]
+ [2m12[0m |     const [selectedIdx, setSelectedIdx] = useState(-1);
+ [2m13[0m |     const [showSuggestions, setShowSuggestions] = useState(false);
+ [2m14[0m |     const [history, setHistory] = useState([]);
+ [2m15[0m |     const [historyIdx, setHistoryIdx] = useState(-1);
+    : [31;1m           ^^^^^|^^^^[0m
+    :                 [31;1m`-- [31;1mprevious definition of `historyIdx` here[0m[0m
+ [2m16[0m |     const [historyIdx, setHistoryIdx] = useState(-1);
+    : [33;1m           ^^^^^|^^^^[0m
+    :                 [33;1m`-- [33;1m`historyIdx` redefined here[0m[0m
+ [2m17[0m |     const inputRef = useRef(null);
+ [2m18[0m |     const debounceRef = useRef(null);
+ [2m19[0m |     const { addToast } = useToast();
+    `----
+
+  [31mx[0m the name `setHistoryIdx` is defined multiple times
+    ,-[[36;1;4m/home/gopi/pentagon-project/frontend/components/CommandBar.js[0m:12:1]
+ [2m12[0m |     const [selectedIdx, setSelectedIdx] = useState(-1);
+ [2m13[0m |     const [showSuggestions, setShowSuggestions] = useState(false);
+ [2m14[0m |     const [history, setHistory] = useState([]);
+ [2m15[0m |     const [historyIdx, setHistoryIdx] = useState(-1);
+    : [31;1m                       ^^^^^^|^^^^^^[0m
+    :                              [31;1m`-- [31;1mprevious definition of `setHistoryIdx` here[0m[0m
+ [2m16[0m |     const [historyIdx, setHistoryIdx] = useState(-1);
+    : [33;1m                       ^^^^^^|^^^^^^[0m
+    :                              [33;1m`-- [33;1m`setHistoryIdx` redefined here[0m[0m
+ [2m17[0m |     const inputRef = useRef(null);
+ [2m18[0m |     const debounceRef = useRef(null);
+ [2m19[0m |     const { addToast } = useToast();
+    `----
+
+Import trace for requested module:
+./components/CommandBar.js
+./app/page.js
+ ⚠ ./components/CommandBar.js
+Attempted import error: 'useToast' is not exported from './ToastManager' (imported as 'useToast').
+
+Import trace for requested module:
+./components/CommandBar.js
+./app/page.js
+
+./components/CommandBar.js
+Attempted import error: 'useToast' is not exported from './ToastManager' (imported as 'useToast').
+
+Import trace for requested module:
+./components/CommandBar.js
+./app/page.js
+
+./components/CommandBar.js
+Attempted import error: 'useToast' is not exported from './ToastManager' (imported as 'useToast').
+
+Import trace for requested module:
+./components/CommandBar.js
+./app/page.js
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ components/CommandBar.js (18:34) @ useToast
+ ⨯ TypeError: (0 , _ToastManager__WEBPACK_IMPORTED_MODULE_4__.useToast) is not a function
+    at CommandBar (./components/CommandBar.js:27:81)
+digest: "3208985845"
+[0m [90m 16 |[39m     [36mconst[39m inputRef [33m=[39m useRef([36mnull[39m)[33m;[39m[0m
+[0m [90m 17 |[39m     [36mconst[39m debounceRef [33m=[39m useRef([36mnull[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 18 |[39m     [36mconst[39m { addToast } [33m=[39m useToast()[33m;[39m[0m
+[0m [90m    |[39m                                  [31m[1m^[22m[39m[0m
+[0m [90m 19 |[39m[0m
+[0m [90m 20 |[39m     [90m// Load command history from localStorage[39m[0m
+[0m [90m 21 |[39m     useEffect(() [33m=>[39m {[0m
+ GET / 500 in 283ms
+ ⨯ components/CommandBar.js (18:34) @ useToast
+ ⨯ TypeError: (0 , _ToastManager__WEBPACK_IMPORTED_MODULE_4__.useToast) is not a function
+    at CommandBar (./components/CommandBar.js:27:81)
+digest: "3208985845"
+[0m [90m 16 |[39m     [36mconst[39m inputRef [33m=[39m useRef([36mnull[39m)[33m;[39m[0m
+[0m [90m 17 |[39m     [36mconst[39m debounceRef [33m=[39m useRef([36mnull[39m)[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 18 |[39m     [36mconst[39m { addToast } [33m=[39m useToast()[33m;[39m[0m
+[0m [90m    |[39m                                  [31m[1m^[22m[39m[0m
+[0m [90m 19 |[39m[0m
+[0m [90m 20 |[39m     [90m// Load command history from localStorage[39m[0m
+[0m [90m 21 |[39m     useEffect(() [33m=>[39m {[0m
+ GET / 500 in 253ms
+[?25h

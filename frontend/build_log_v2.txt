@@ -1,0 +1,30 @@
+
+> pentagon-frontend@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/5) ...
+   Generating static pages (1/5) 
+   Generating static pages (2/5) 
+   Generating static pages (3/5) 
+ ✓ Generating static pages (5/5)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    33.7 kB         121 kB
+├ ○ /_not-found                          873 B          88.4 kB
+└ ○ /login                               579 kB          666 kB
++ First Load JS shared by all            87.5 kB
+  ├ chunks/117-d2595adecac8e4d2.js       31.7 kB
+  ├ chunks/fd9d1056-e1f59b67e569df2b.js  53.6 kB
+  └ other shared chunks (total)          2.16 kB
+
+
+○  (Static)  prerendered as static content
+

@@ -1,0 +1,45 @@
+
+> pentagon-frontend@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/5) ...
+   Generating static pages (1/5) 
+   Generating static pages (2/5) 
+   Generating static pages (3/5) 
+Error: useToast must be used within a ToastManager
+    at Y (/home/gopi/pentagon-project/frontend/.next/server/app/page.js:138:76828)
+    at Z (/home/gopi/pentagon-project/frontend/.next/server/app/page.js:138:79169)
+    at nj (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nL (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nL (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681) {
+  digest: '787538765'
+}
+
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+
+Error: useToast must be used within a ToastManager
+    at Y (/home/gopi/pentagon-project/frontend/.next/server/app/page.js:138:76828)
+    at Z (/home/gopi/pentagon-project/frontend/.next/server/app/page.js:138:79169)
+    at nj (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nL (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nL (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/gopi/pentagon-project/frontend/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+ ✓ Generating static pages (5/5)
+
+> Export encountered errors on following paths:
+	/page: /

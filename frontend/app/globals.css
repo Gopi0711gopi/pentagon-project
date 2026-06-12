@@ -1,0 +1,1088 @@
+/* ═══════════════════════════════════════════════════════════════
+   PENTAGON — Design System
+   Five Agents. One Mission. Total Sovereignty.
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ──────────────────────────────────── */
+
+:root {
+    /* Core palette */
+    --bg-primary: #050a12;
+    --bg-secondary: #0a1628;
+    --bg-surface: #0f1d32;
+    --bg-elevated: #152240;
+    --bg-hover: #1a2d52;
+
+    /* Glass */
+    --glass-bg: rgba(15, 29, 50, 0.7);
+    --glass-border: rgba(56, 189, 248, 0.15);
+    --glass-glow: rgba(56, 189, 248, 0.05);
+
+    /* Accent */
+    --accent-cyan: #38bdf8;
+    --accent-blue: #3b82f6;
+    --accent-purple: #a78bfa;
+    --accent-pink: #f472b6;
+
+    /* Agent colors */
+    --guardian-color: #f87171;
+    --guardian-glow: rgba(248, 113, 113, 0.2);
+    --financier-color: #4ade80;
+    --financier-glow: rgba(74, 222, 128, 0.2);
+    --scout-color: #60a5fa;
+    --scout-glow: rgba(96, 165, 250, 0.2);
+    --operator-color: #fbbf24;
+    --operator-glow: rgba(251, 191, 36, 0.2);
+    --liaison-color: #38bdf8;
+    --liaison-glow: rgba(56, 189, 248, 0.2);
+
+    /* Status */
+    --status-success: #4ade80;
+    --status-warning: #fbbf24;
+    --status-danger: #f87171;
+    --status-info: #60a5fa;
+
+    /* Text */
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Fonts */
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+    /* Spacing */
+    --sidebar-width: 260px;
+}
+
+/* ── Light Theme ───────────────────────────────────────────── */
+
+[data-theme="light"] {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --bg-surface: #e2e8f0;
+    --bg-elevated: #cbd5e1;
+    --bg-hover: #d1d9e6;
+
+    --glass-bg: rgba(241, 245, 249, 0.85);
+    --glass-border: rgba(56, 130, 246, 0.2);
+    --glass-glow: rgba(56, 130, 246, 0.05);
+
+    --accent-cyan: #0284c7;
+    --accent-blue: #2563eb;
+    --accent-purple: #7c3aed;
+    --accent-pink: #db2777;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+}
+
+/* Smooth theme transition (scoped to layout containers only) */
+body,
+.sidebar,
+.main-content,
+.glass-card,
+.command-input-wrapper {
+    transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* ── Toast Animations ──────────────────────────────────────── */
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%) scale(0.9);
+    }
+}
+
+/* ── Responsive – Tablet ───────────────────────────────────── */
+
+@media (max-width: 1024px) {
+    :root {
+        --sidebar-width: 68px;
+    }
+
+    .sidebar {
+        width: var(--sidebar-width) !important;
+        padding: 16px 8px !important;
+        overflow: hidden;
+    }
+
+    .sidebar .sidebar-nav-item span:not(.icon),
+    .sidebar .gradient-text,
+    .sidebar [style*="fontSize: '11px'"],
+    .sidebar [data-label] {
+        display: none;
+    }
+
+    .sidebar-nav-item .icon {
+        margin: 0 auto;
+    }
+
+    .war-room-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ── Responsive – Mobile ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 0px;
+    }
+
+    .sidebar {
+        position: fixed !important;
+        left: -280px;
+        width: 280px !important;
+        top: 0;
+        bottom: 0;
+        z-index: 1000;
+        transition: left 0.3s ease !important;
+        padding: 20px 16px !important;
+    }
+
+    .sidebar.mobile-open {
+        left: 0;
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+    }
+
+    .sidebar-backdrop.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+
+    .main-content {
+        padding: 12px 16px !important;
+    }
+
+    .command-input-wrapper {
+        flex-wrap: wrap;
+    }
+
+    .command-input-wrapper>div {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 4px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .command-input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .command-btn {
+        flex: 1;
+        text-align: center;
+    }
+
+    .command-input-wrapper>span:first-child {
+        display: none;
+    }
+}
+
+/* ── Base Reset ─────────────────────────────────────────────── */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background effects now handled by AnimatedBackground.js canvas */
+
+/* ── Glass Card ─────────────────────────────────────────────── */
+
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 30px var(--glass-glow), inset 0 0 30px var(--glass-glow);
+}
+
+.glass-card-sm {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Gradient Text ──────────────────────────────────────────── */
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-text-warm {
+    background: linear-gradient(135deg, var(--financier-color) 0%, var(--operator-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Pentagon Logo ──────────────────────────────────────────── */
+
+.pentagon-logo {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.pentagon-logo svg {
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+
+.sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-right: 1px solid var(--glass-border);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+/* Hide scrollbar for sidebar to keep it clean */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    user-select: none;
+}
+
+.sidebar-nav-item:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.sidebar-nav-item.active {
+    background: rgba(56, 189, 248, 0.08);
+    color: var(--accent-cyan);
+    border-color: rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.05);
+}
+
+.sidebar-nav-item .icon {
+    font-size: 18px;
+    width: 24px;
+    text-align: center;
+}
+
+/* ── Main Content ───────────────────────────────────────────── */
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    padding: 24px 32px;
+    position: relative;
+    z-index: 1;
+    width: calc(100vw - var(--sidebar-width));
+    max-width: calc(100vw - var(--sidebar-width));
+    overflow-x: hidden;
+}
+
+/* ── Command Input ──────────────────────────────────────────── */
+
+.command-input-wrapper {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    padding: 4px;
+    transition: all 0.3s ease;
+}
+
+.command-input-wrapper:focus-within {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.1);
+}
+
+.command-input {
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.command-input::placeholder {
+    color: var(--text-muted);
+}
+
+.command-btn {
+    padding: 10px 24px;
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.command-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+}
+
+.command-btn:active {
+    transform: translateY(0);
+}
+
+.command-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ── Agent Badge ────────────────────────────────────────────── */
+
+.agent-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 12px 2px 4px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.agent-badge img {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.agent-badge.guardian {
+    color: var(--guardian-color);
+    border-color: rgba(248, 113, 113, 0.3);
+    box-shadow: 0 0 15px rgba(248, 113, 113, 0.1);
+}
+
+.agent-badge.financier {
+    color: var(--financier-color);
+    border-color: rgba(74, 222, 128, 0.3);
+    box-shadow: 0 0 15px rgba(74, 222, 128, 0.1);
+}
+
+.agent-badge.scout {
+    color: var(--scout-color);
+    border-color: rgba(96, 165, 250, 0.3);
+    box-shadow: 0 0 15px rgba(96, 165, 250, 0.1);
+}
+
+.agent-badge.operator {
+    color: var(--operator-color);
+    border-color: rgba(251, 191, 36, 0.3);
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.1);
+}
+
+.agent-badge.liaison {
+    color: var(--liaison-color);
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+/* ── Stat Card ──────────────────────────────────────────────── */
+
+.stat-card {
+    padding: 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ── Thought Trace ──────────────────────────────────────────── */
+
+.trace-item {
+    padding: 16px 20px;
+    border-left: 3px solid var(--glass-border);
+    margin-left: 12px;
+    position: relative;
+    animation: traceSlideIn 0.4s ease-out;
+}
+
+.trace-item::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--glass-border);
+    background: var(--bg-primary);
+}
+
+.trace-item.guardian {
+    border-left-color: var(--guardian-color);
+}
+
+.trace-item.guardian::before {
+    border-color: var(--guardian-color);
+    background: var(--guardian-glow);
+}
+
+.trace-item.financier {
+    border-left-color: var(--financier-color);
+}
+
+.trace-item.financier::before {
+    border-color: var(--financier-color);
+    background: var(--financier-glow);
+}
+
+.trace-item.scout {
+    border-left-color: var(--scout-color);
+}
+
+.trace-item.scout::before {
+    border-color: var(--scout-color);
+    background: var(--scout-glow);
+}
+
+.trace-item.operator {
+    border-left-color: var(--operator-color);
+}
+
+.trace-item.operator::before {
+    border-color: var(--operator-color);
+    background: var(--operator-glow);
+}
+
+.trace-item.liaison {
+    border-left-color: var(--liaison-color);
+}
+
+.trace-item.liaison::before {
+    border-color: var(--liaison-color);
+    background: var(--liaison-glow);
+}
+
+/* ── Approval Card ──────────────────────────────────────────── */
+
+.approval-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.approval-card:hover {
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.approval-btn {
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    font-family: var(--font-sans);
+}
+
+.approval-btn.approve {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white;
+}
+
+.approval-btn.approve:hover {
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+    transform: translateY(-1px);
+}
+
+.approval-btn.reject {
+    background: rgba(248, 113, 113, 0.15);
+    color: var(--guardian-color);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.approval-btn.reject:hover {
+    background: rgba(248, 113, 113, 0.25);
+}
+
+/* ── Status Indicator ───────────────────────────────────────── */
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.idle {
+    background: var(--text-muted);
+}
+
+.status-dot.working {
+    background: var(--status-warning);
+    animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.status-dot.complete {
+    background: var(--status-success);
+}
+
+.status-dot.error {
+    background: var(--status-danger);
+}
+
+/* ── Risk Badge ─────────────────────────────────────────────── */
+
+.risk-badge {
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-mono);
+}
+
+.risk-badge.low {
+    background: rgba(74, 222, 128, 0.15);
+    color: var(--status-success);
+}
+
+.risk-badge.medium {
+    background: rgba(251, 191, 36, 0.15);
+    color: var(--status-warning);
+}
+
+.risk-badge.high {
+    background: rgba(248, 113, 113, 0.15);
+    color: var(--status-danger);
+}
+
+.risk-badge.critical {
+    background: rgba(248, 113, 113, 0.25);
+    color: #fca5a5;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.2);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(56, 189, 248, 0.4);
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 currentColor;
+    }
+
+    50% {
+        opacity: 0.7;
+        box-shadow: 0 0 0 4px transparent;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes traceSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* ── Interactive Icon Animations ────────────────────────────── */
+
+@keyframes iconJump {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    40% {
+        transform: translateY(-4px) scale(1.1);
+    }
+
+    70% {
+        transform: translateY(0) scale(0.95);
+    }
+
+    85% {
+        transform: translateY(-1px) scale(1.02);
+    }
+}
+
+@keyframes iconSwing {
+    20% {
+        transform: rotate(15deg);
+    }
+
+    40% {
+        transform: rotate(-10deg);
+    }
+
+    60% {
+        transform: rotate(5deg);
+    }
+
+    80% {
+        transform: rotate(-3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes iconWobble {
+
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    15% {
+        transform: translateX(-2px) rotate(-4deg);
+    }
+
+    30% {
+        transform: translateX(2px) rotate(4deg);
+    }
+
+    45% {
+        transform: translateX(-2px) rotate(-2deg);
+    }
+
+    60% {
+        transform: translateX(1px) rotate(2deg);
+    }
+}
+
+@keyframes iconPop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes iconSpinHover {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+/* Icon Animation Utility Classes */
+.animate-icon-jump:hover .icon,
+.animate-icon-jump:hover {
+    animation: iconJump 0.5s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+.animate-icon-swing:hover .icon,
+.animate-icon-swing:hover {
+    animation: iconSwing 0.6s ease-in-out forwards;
+    transform-origin: top center;
+}
+
+.animate-icon-wobble:hover .icon,
+.animate-icon-wobble:hover {
+    animation: iconWobble 0.6s ease-in-out forwards;
+}
+
+.animate-icon-pop:hover .icon,
+.animate-icon-pop:hover {
+    animation: iconPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-icon-spin:hover .icon,
+.animate-icon-spin:hover {
+    animation: iconSpinHover 0.4s ease-out forwards;
+}
+
+/* Ensure icons have smooth default transitions */
+.icon,
+.sidebar-nav-item .icon,
+.action-icon,
+svg {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease, filter 0.2s ease;
+    display: inline-block;
+}
+
+.animate-fade-in {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* ── Pentagon Visualization ─────────────────────────────────── */
+
+.pentagon-viz {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    margin: 0 auto;
+}
+
+.pentagon-node {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    cursor: default;
+}
+
+.pentagon-node:hover {
+    transform: scale(1.15);
+    z-index: 10;
+}
+
+.pentagon-node.guardian {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--guardian-glow);
+    border-color: var(--guardian-color);
+    box-shadow: 0 0 24px var(--guardian-glow);
+}
+
+.pentagon-node.financier {
+    top: 35%;
+    right: 0;
+    background: var(--financier-glow);
+    border-color: var(--financier-color);
+    box-shadow: 0 0 24px var(--financier-glow);
+}
+
+.pentagon-node.scout {
+    top: 35%;
+    left: 0;
+    background: var(--scout-glow);
+    border-color: var(--scout-color);
+    box-shadow: 0 0 24px var(--scout-glow);
+}
+
+.pentagon-node.operator {
+    bottom: 0;
+    right: 15%;
+    background: var(--operator-glow);
+    border-color: var(--operator-color);
+    box-shadow: 0 0 24px var(--operator-glow);
+}
+
+.pentagon-node.liaison {
+    bottom: 0;
+    left: 15%;
+    background: var(--liaison-glow);
+    border-color: var(--liaison-color);
+    box-shadow: 0 0 24px var(--liaison-glow);
+}
+
+.pentagon-node.active {
+    animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Pentagon SVG connections */
+.pentagon-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.pentagon-line {
+    stroke: rgba(56, 189, 248, 0.15);
+    stroke-width: 1.5;
+    fill: none;
+}
+
+.pentagon-line.active {
+    stroke: var(--accent-cyan);
+    stroke-width: 2;
+    opacity: 0.6;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ── Section Header ─────────────────────────────────────────── */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.section-header .badge {
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-cyan);
+    font-family: var(--font-mono);
+}
+
+/* ── Empty State ────────────────────────────────────────────── */
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ── Loading Skeleton ───────────────────────────────────────── */
+
+.skeleton {
+    background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-elevated) 50%, var(--bg-surface) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
